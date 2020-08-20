@@ -251,14 +251,14 @@ xcopy /y /d "$(MyDLLDir)OpenSSL\ssleay32.dll" "$(OutputPath)"</Command>
     <ClInclude Include="TickService.h" />
     <ClInclude Include="src\ChannelDataCorrector\ChannelDataGetter.h" />
     <ClInclude Include="src\ChannelDataCorrector\ChannelsHelpHeader.h" />
-    <ClInclude Include="src\DirsService.h" />
+    <ClInclude Include="DirsService.h" />
     <ClInclude Include="ITrendMonitoring.h" />
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\ApplicationConfiguration.h" />
-    <ClInclude Include="src\src\IMonitoringTasksService.h" />
+    <ClInclude Include="src\IMonitoringTasksService.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="src\MonitoringTasksServiceImpl.h" />
-    <ClInclude Include="src\ITelegramUsersList.h" />
+    <ClInclude Include="ITelegramUsersList.h" />
     <ClInclude Include="src\TelegramBot.h" />
     <ClInclude Include="src\TrendMonitoring.h" />
     <ClInclude Include="src\Utils.h" />

@@ -86,15 +86,6 @@
     <ClInclude Include="src\Utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\DirsService.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\src\IMonitoringTasksService.h">
-      <Filter>MonitoringTasksService</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ITelegramUsersList.h">
-      <Filter>TelegramBot</Filter>
-    </ClInclude>
     <ClInclude Include="src\PugiXML\pugiconfig.hpp">
       <Filter>PugiXML</Filter>
     </ClInclude>
@@ -103,6 +94,15 @@
     </ClInclude>
     <ClInclude Include="src\ApplicationConfiguration.h">
       <Filter>Configuration</Filter>
+    </ClInclude>
+    <ClInclude Include="DirsService.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IMonitoringTasksService.h">
+      <Filter>MonitoringTasksService</Filter>
+    </ClInclude>
+    <ClInclude Include="ITelegramUsersList.h">
+      <Filter>TelegramBot</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
