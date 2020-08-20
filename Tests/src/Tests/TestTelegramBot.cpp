@@ -382,7 +382,7 @@ TEST_F(TestTelegramBot, CheckAllertCommandCallbacks)
                 trendMonitoring->changeMonitoingChannelNotify(ind, !allertOn);
 
                 expectedMessage.Format(L"Оповещения для канала %s %s",
-                                       *std::next(allChannels.begin(), ind),
+                                       std::next(allChannels.begin(), ind)->GetString(),
                                        allertOn ? L"включены" : L"выключены");
                 emulateBroadcastCallbackQuery(callBackData);
 
@@ -489,8 +489,9 @@ TEST_F(TestTelegramBot, TestProcessingMonitoringError)
     expectedReciepientsChats = &userChats;
 
     // пересылаем ошибку рандомную
-    expectedMessage = L"Пересылаемой ошибки нет в списке, возможно ошибка является устаревшей (хранятся последние 200 ошибок) или программа была перещапущена.";
-    emulateBroadcastCallbackQuery(L"/resend errorId={'123'}");
+    expectedMessage = L"Пересылаемой ошибки нет в списке, возможно ошибка является устаревшей (хранятся последние 200 ошибок) или программа была перезапущена.";
+    GUID testGuid = { 123 };
+    emulateBroadcastCallbackQuery(L"/resend errorId={'" + CString(CComBSTR(testGuid)) + L"'}");
 
     // пересылаем реальную
     expectedMessage = L"Ошибка была успешно переслана обычным пользователям.";

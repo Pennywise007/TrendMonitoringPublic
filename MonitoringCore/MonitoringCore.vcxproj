@@ -98,7 +98,7 @@
       <ShowIncludes>false</ShowIncludes>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)src\;$(ProjectDir)src\PugiXML\;$(MyIncludeDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(BoostIncludeDir);$(ProjectDir);$(ProjectDir)src\;$(ProjectDir)src\PugiXML\;$(MyIncludeDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -115,7 +115,7 @@ xcopy /y /d "$(MyDLLDir)TelegramDLL\TelegramDLLD.dll" "$(OutputPath)"
 echo copy "$(MyDLLDir)TelegramDLL\TelegramDLLD.pdb" "$(OutputPath)"
 xcopy /y /d "$(MyDLLDir)TelegramDLL\TelegramDLLD.pdb" "$(OutputPath)"
 
-echo copy "$(MyDLLDir)\OpenSSL\libeay32.dll" "$(OutputPath)"
+echo copy "$(MyDLLDir)OpenSSL\libeay32.dll" "$(OutputPath)"
 xcopy /y /d "$(MyDLLDir)OpenSSL\libeay32.dll" "$(OutputPath)"
 
 echo copy "$(MyDLLDir)OpenSSL\ssleay32.dll" "$(OutputPath)"
@@ -134,7 +134,7 @@ xcopy /y /d "$(MyDLLDir)OpenSSL\ssleay32.dll" "$(OutputPath)"</Command>
       <ShowIncludes>false</ShowIncludes>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)src\;$(ProjectDir)src\PugiXML\;$(MyIncludeDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(BoostIncludeDir);$(ProjectDir);$(ProjectDir)src\;$(ProjectDir)src\PugiXML\;$(MyIncludeDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -145,7 +145,17 @@ xcopy /y /d "$(MyDLLDir)OpenSSL\ssleay32.dll" "$(OutputPath)"</Command>
       <AdditionalLibraryDirectories>$(MyLibDir)TelegramDLL\;D:\Program Files (x86)\Visual Leak Detector\lib\Win64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
     <PostBuildEvent>
-      <Command>echo copy "$(MyDLLDir)TelegramDLL\TelegramDLLD.dll" "$(OutputPath)"</Command>
+      <Command>echo copy "$(MyDLLDir)TelegramDLL\TelegramDLLD.dll" "$(OutputPath)"
+xcopy /y /d "$(MyDLLDir)TelegramDLL\TelegramDLLD.dll" "$(OutputPath)"
+
+echo copy "$(MyDLLDir)TelegramDLL\TelegramDLLD.pdb" "$(OutputPath)"
+xcopy /y /d "$(MyDLLDir)TelegramDLL\TelegramDLLD.pdb" "$(OutputPath)"
+
+echo copy "$(MyDLLDir)OpenSSL\libeay32.dll" "$(OutputPath)"
+xcopy /y /d "$(MyDLLDir)OpenSSL\libeay32.dll" "$(OutputPath)"
+
+echo copy "$(MyDLLDir)OpenSSL\ssleay32.dll" "$(OutputPath)"
+xcopy /y /d "$(MyDLLDir)OpenSSL\ssleay32.dll" "$(OutputPath)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -162,7 +172,7 @@ xcopy /y /d "$(MyDLLDir)OpenSSL\ssleay32.dll" "$(OutputPath)"</Command>
       <ShowIncludes>false</ShowIncludes>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)src\;$(ProjectDir)src\PugiXML\;$(MyIncludeDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(BoostIncludeDir);$(ProjectDir);$(ProjectDir)src\;$(ProjectDir)src\PugiXML\;$(MyIncludeDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -202,7 +212,7 @@ xcopy /y /d "$(MyDLLDir)OpenSSL\ssleay32.dll" "$(OutputPath)"</Command>
       <ShowIncludes>false</ShowIncludes>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)src\;$(ProjectDir)src\PugiXML\;$(MyIncludeDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(BoostIncludeDir);$(ProjectDir);$(ProjectDir)src\;$(ProjectDir)src\PugiXML\;$(MyIncludeDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -215,7 +225,17 @@ xcopy /y /d "$(MyDLLDir)OpenSSL\ssleay32.dll" "$(OutputPath)"</Command>
       <AdditionalLibraryDirectories>$(MyLibDir)TelegramDLL\;D:\Program Files (x86)\Visual Leak Detector\lib\Win64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
     <PostBuildEvent>
-      <Command>echo copy "$(MyDLLDir)TelegramDLL\TelegramDLL.dll" "$(OutputPath)"</Command>
+      <Command>echo copy "$(MyDLLDir)TelegramDLL\TelegramDLL.dll" "$(OutputPath)"
+xcopy /y /d "$(MyDLLDir)TelegramDLL\TelegramDLL.dll" "$(OutputPath)"
+
+echo copy "$(MyDLLDir)TelegramDLL\TelegramDLL.pdb" "$(OutputPath)"
+xcopy /y /d "$(MyDLLDir)TelegramDLL\TelegramDLL.pdb" "$(OutputPath)"
+
+echo copy "$(MyDLLDir)OpenSSL\libeay32.dll" "$(OutputPath)"
+xcopy /y /d "$(MyDLLDir)OpenSSL\libeay32.dll" "$(OutputPath)"
+
+echo copy "$(MyDLLDir)OpenSSL\ssleay32.dll" "$(OutputPath)"
+xcopy /y /d "$(MyDLLDir)OpenSSL\ssleay32.dll" "$(OutputPath)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

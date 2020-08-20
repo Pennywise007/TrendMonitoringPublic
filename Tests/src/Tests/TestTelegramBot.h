@@ -92,7 +92,7 @@ protected:
     TestTelegramUsersList::Ptr m_pUserList;
 
     // тестовый объект с фейковым потоком телеграма
-    class TestTelegramThread* m_pTelegramThread;
+    class TestTelegramThread* m_pTelegramThread = nullptr;
 
     // список команд и доступности для различных пользователей
     std::map<CString, std::set<ITelegramUsersList::UserStatus>> m_commandsToUserStatus;

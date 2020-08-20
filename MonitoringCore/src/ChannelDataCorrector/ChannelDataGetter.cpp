@@ -25,8 +25,8 @@ CChannelDataGetter::CChannelDataGetter(const CString& channelName,
 
 //----------------------------------------------------------------------------//
 void CChannelDataGetter::getSourceChannelData(const CString& channelName,
-                                            const CTime& timeStart, const CTime& timeEnd,
-                                            std::vector<float>& data)
+                                              const CTime& timeStart, const CTime& timeEnd,
+                                              std::vector<float>& data)
 {
     // получаем инфу по каналу
     ChannelInfo chanInfo;
@@ -64,9 +64,9 @@ void CChannelDataGetter::deleteEmissionsValuesFromData(std::vector<float>& data)
     float averageVal(0);
     // удаляем нули и наны
     averageVal = deleteInappropriateValues(data, [](const float& value) mutable
-    {
-        return abs(value) <= FLT_MIN;
-    });
+                                           {
+                                               return abs(value) <= FLT_MIN;
+                                           });
 
     size_t dataSize = data.size();
     if (dataSize > 10)
@@ -132,18 +132,18 @@ void CChannelDataGetter::deleteEmissionsValuesFromData(std::vector<float>& data)
         // удаляем данные не в нашем диапазоне
         deleteInappropriateValues(data,
                                   [validIntervalStart, validIntervalEnd](const float& value) mutable
-        {
-            return value < validIntervalStart ||
-                value > validIntervalEnd;
-        });
+                                  {
+                                      return value < validIntervalStart ||
+                                          value > validIntervalEnd;
+                                  });
     }
     else
     {
         // удаляем выделяющиеся данные
         deleteInappropriateValues(data, [&averageVal](const float& value) mutable
-        {
-            return abs(value - averageVal) > 30;
-        });
+                                  {
+                                      return abs(value - averageVal) > 30;
+                                  });
     }
 }
 
@@ -201,9 +201,9 @@ void CChannelDataGetter::FillChannelList(const CString& sDirectory,
 float CChannelDataGetter::deleteInappropriateValues(std::vector<float>& datavect, Callback&& callback)
 {
     datavect.erase(std::remove_if(datavect.begin(), datavect.end(), [&callback](auto val)
-    {
-        return callback(val);
-    }), datavect.end());
+                                  {
+                                      return callback(val);
+                                  }), datavect.end());
 
     return std::accumulate(datavect.begin(), datavect.end(), 0.f) /
         (datavect.empty() ? 1 : datavect.size());
@@ -394,10 +394,10 @@ CString GetAnotherPath(const CString& sSoursePath, const CString& sPath,
         sRet.TrimRight(L"\\");
 
         std::for_each(std::prev(vPath.end(), depthLevel), vPath.end(), [&](CString &s)
-        {
-            sRet += L"\\";
-            sRet += s;
-        });
+                      {
+                          sRet += L"\\";
+                          sRet += s;
+                      });
     }
 
     return sRet;
@@ -406,13 +406,12 @@ CString GetAnotherPath(const CString& sSoursePath, const CString& sPath,
 //----------------------------------------------------------------------------//
 void Resampling(float* pSource, long lSourceSize, float* pDestination, long lDestinationSize)
 {
-    bool bFlag(lSourceSize > lDestinationSize);
-    if (bFlag)
+    if (lSourceSize > lDestinationSize)
     {
         for (long i = 0; i < lDestinationSize; i += 2)
         {
             long lIndex = (long)(round(double(i) / double(lDestinationSize) * double(lSourceSize)));
-            long lIndex2 = (long)(round(double(i + 2) / double(lDestinationSize) * double(lSourceSize)));
+            long lIndex2 = (long)(round(double(i + 2.) / double(lDestinationSize) * double(lSourceSize)));
             if (lIndex > lSourceSize - 1)
                 lIndex = lSourceSize - 1;
             if (lIndex2 > lSourceSize - 1)
@@ -489,9 +488,9 @@ void Resampling(float* pSource, long lSourceSize, float* pDestination, long lDes
 
 //----------------------------------------------------------------------------//
 void CChannelDataGetter::GetSourceChannelDataByInterval(const CString& channelName,
-                                                           const CTime& tStart, const CTime& tEnd,
-                                                           long uiLength, float* pData,
-                                                           double freq)
+                                                        const CTime& tStart, const CTime& tEnd,
+                                                        long uiLength, float* pData,
+                                                        double freq)
 {
     ChannelsFromFileByYear channelMap = GetSourceFilesInfoByInterval(channelName, tStart, tEnd);
 
@@ -573,16 +572,16 @@ void CChannelDataGetter::GetSourceChannelDataByInterval(const CString& channelNa
                     if (hMap)
                     {
                         //смещение в файле исходных данных (которое нужно)
-                        long long llFileOffset = long((double(CTimeSpan(tCurrentBegin - timeBegin).GetTotalSeconds()) + currentBegin) / dFileDelta) * sizeof(float);
+                        long long llFileOffset = long long((double(CTimeSpan(tCurrentBegin - timeBegin).GetTotalSeconds()) + currentBegin) / dFileDelta) * sizeof(float);
                         long long llTail = dwFileSize * sizeof(float);
                         //смещение в файле сжатых данных (приведенное к гранулярности)
                         long long llFileOffsetReal = llFileOffset / dwAllocationGranularity * dwAllocationGranularity;
                         long lDeltaFileOffset(long(llFileOffset - llFileOffsetReal));
                         //количество точек
                         double dFactor = freq * dFileDelta;
-                        long long lCount = long long(lLength * dFactor);
-                        if (llTail - llFileOffset < lCount * (long long)sizeof(float))
-                            lCount = (llTail - llFileOffset) / (long long)sizeof(float);
+                        long lCount = long(lLength * dFactor);
+                        if (llTail - llFileOffset < (long long)lCount * sizeof(float))
+                            lCount = (long)((llTail - llFileOffset) / sizeof(float));
 
                         unsigned long ulSize = unsigned long(sizeof(float)* lCount + lDeltaFileOffset);
                         float* pView = reinterpret_cast<float*>(MapViewOfFile(hMap, FILE_MAP_READ, 0, DWORD(llFileOffsetReal), ulSize));
@@ -592,7 +591,7 @@ void CChannelDataGetter::GetSourceChannelDataByInterval(const CString& channelNa
                             float* pDestData = pData + lPosition;
 
                             // проверяем что при загрузке данных не будет выхода за пределы диапазона
-                            if (lPosition + lCount > (long)uiLength)
+                            if (lPosition + lCount > uiLength)
                                 lCount = uiLength - lPosition;
                             if (lCount < 0)
                                 break;
@@ -613,13 +612,13 @@ void CChannelDataGetter::GetSourceChannelDataByInterval(const CString& channelNa
                                         long lQuantity = long(double(lCount) / dFactor);
                                         if (lPosition + lQuantity > uiLength)
                                             lQuantity = uiLength - lPosition;
-                                        Resampling(pSrcData, (long)lCount, pDestData, lQuantity);
+                                        Resampling(pSrcData, lCount, pDestData, lQuantity);
                                         //TRACE("Fill %d points by resampling\n", lQuantity);
                                     }
                                     else
                                     {
-                                        int iIndex(0);
-                                        for (int i = 0; i < lCount; i += int(dFactor) * 2)
+                                        long iIndex(0);
+                                        for (long i = 0; i < lCount; i += long(dFactor) * 2)
                                         {
                                             float fMin, fMax;
                                             fMin = fMax = pSrcData[i];
@@ -628,11 +627,11 @@ void CChannelDataGetter::GetSourceChannelDataByInterval(const CString& channelNa
                                                 CheckMinimum(fMin, pSrcData[i + j]);
                                                 CheckMaximum(fMax, pSrcData[i + j]);
                                             }*/
-                                            if (lPosition + iIndex < long(uiLength))
+                                            if (lPosition + iIndex < uiLength)
                                             {
                                                 pDestData[iIndex] = fMin;
                                                 ++iIndex;
-                                                if (lPosition + iIndex < long(uiLength))
+                                                if (lPosition + iIndex < uiLength)
                                                 {
                                                     pDestData[iIndex] = fMax;
                                                     ++iIndex;
@@ -648,7 +647,7 @@ void CChannelDataGetter::GetSourceChannelDataByInterval(const CString& channelNa
                                     long lQuantity = long(double(lCount) / dFactor);
                                     if (lPosition + lQuantity > uiLength)
                                         lQuantity = uiLength - lPosition;
-                                    Resampling(pSrcData, (long)lCount, pDestData, lQuantity);
+                                    Resampling(pSrcData, lCount, pDestData, lQuantity);
                                     //TRACE("Fill %d points by resampling\n", lQuantity);
                                 }
                             }

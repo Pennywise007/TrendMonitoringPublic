@@ -206,7 +206,7 @@ protected://********************************************************************
         }
     };
     std::list<DeletedItemsInfo> m_DeletedItems;
-    bool m_bMatchAll;
+    bool m_bMatchAll = false;
     std::list<CString> m_sFindStrings;
     // список функций для сортировки каждой колонки
     std::vector<std::pair<int, std::function<int(CString, CString)>>> m_SortFunct;

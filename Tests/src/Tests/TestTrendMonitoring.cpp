@@ -54,7 +54,7 @@ void MonitoringTestClass::checkModelAndRealChannelsData(const std::string& testD
     auto reportText = [&testDescr](const size_t index, const std::string& extraText)
     {
         CStringA resText;
-        resText.Format("%s: Различаются данные по каналу №%ul, различаются %s.", testDescr, index, extraText);
+        resText.Format("%s: Различаются данные по каналу №%u, различаются %s.", testDescr.c_str(), index, extraText.c_str());
         return resText;
     };
 

@@ -595,12 +595,12 @@ void CListGroupCtrl::OnContextMenu(CWnd* pWnd, CPoint point)
                 {
                     if (HasGroupState(nGroupId, LVGS_COLLAPSED))
                     {
-                        CString menuText = sExpandGroup; +L": " + groupHeader;		// Expand group:
+                        CString menuText = sExpandGroup + L": " + groupHeader;		// Expand group:
                         menu.InsertMenu(0, uFlags, 1, menuText);
                     }
                     else
                     {
-                        CString menuText = sCollapseGroup; +L": " + groupHeader;	// Collapse group:
+                        CString menuText = sCollapseGroup + L": " + groupHeader;	// Collapse group:
                         menu.InsertMenu(0, uFlags, 2, menuText);
                     }
                 }
@@ -633,12 +633,12 @@ void CListGroupCtrl::OnContextMenu(CWnd* pWnd, CPoint point)
 
                     if (HasGroupState(nGroupId, LVGS_COLLAPSED))
                     {
-                        CString menuText = sExpandGroup; + L": " + groupHeader;		// Expand group:
+                        CString menuText = sExpandGroup + L": " + groupHeader;		// Expand group:
                         menu.InsertMenu(0, uFlags, 1, menuText);
                     }
                     else
                     {
-                        CString menuText = sCollapseGroup; + L": " + groupHeader;	// Collapse group:
+                        CString menuText = sCollapseGroup + L": " + groupHeader;	// Collapse group:
                         menu.InsertMenu(0, uFlags, 2, menuText);
                     }
                 }

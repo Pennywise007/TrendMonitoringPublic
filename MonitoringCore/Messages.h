@@ -134,7 +134,7 @@ private:
         typedef std::unique_ptr<ThreadMsg> UPtr;
 
         // гуид события
-        EventId eventID;
+        EventId eventID = { };
         // пересылаемое значение
         float massageValue = 0.f;
         // передаваемые данные

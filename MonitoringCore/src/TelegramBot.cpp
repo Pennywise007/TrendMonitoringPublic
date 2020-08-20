@@ -201,7 +201,7 @@ void CTelegramBot::onEvent(const EventId& code, float eventValue,
             CTimeSpan permissibleEmptyDataTime =
                 (channelResData.pTaskParameters->endTime - channelResData.pTaskParameters->startTime).GetTotalSeconds() / 30;
 
-            reportText.AppendFormat(L"Канал \"%s\":", channelResData.pTaskParameters->channelName);
+            reportText.AppendFormat(L"Канал \"%s\":", channelResData.pTaskParameters->channelName.GetString());
 
             switch (channelResData.resultType)
             {
@@ -838,7 +838,8 @@ void CTelegramBot::executeCallbackResend(const TgBot::CallbackQuery::Ptr query,
 
     // вытаскиваем гуид из строки
     GUID errorGUID;
-    CLSIDFromString(CComBSTR(errorIdIt->second.c_str()), &errorGUID);
+    if (FAILED(CLSIDFromString(CComBSTR(errorIdIt->second.c_str()), &errorGUID)))
+        assert(!"Не удалось получить гуид!");
 
     auto errorIt = std::find_if(m_monitoringErrors.begin(), m_monitoringErrors.end(),
                                 [&errorGUID](const ErrorInfo& errorInfo)
@@ -848,7 +849,7 @@ void CTelegramBot::executeCallbackResend(const TgBot::CallbackQuery::Ptr query,
     if (errorIt == m_monitoringErrors.end())
     {
         CString text;
-        text.Format(L"Пересылаемой ошибки нет в списке, возможно ошибка является устаревшей (хранятся последние %u ошибок) или программа была перещапущена.",
+        text.Format(L"Пересылаемой ошибки нет в списке, возможно ошибка является устаревшей (хранятся последние %u ошибок) или программа была перезапущена.",
                     kMaxErrorInfoCount);
         m_telegramThread->sendMessage(query->message->chat->id, text);
         return;
@@ -911,19 +912,19 @@ void CTelegramBot::executeCallbackAllertion(const TgBot::CallbackQuery::Ptr quer
         // имя канала из колбэка
         CString callBackChannel = getUNICODEString(channelIt->second);
         // считаем что в списке мониторинга каналы по именам не повторяются иначе это глупо
-        auto channelIt = std::find_if(monitoringChannels.begin(), monitoringChannels.end(),
+        auto channelIt = std::find_if(monitoringChannels.cbegin(), monitoringChannels.cend(),
                                       [&callBackChannel](const auto& channelName)
                                       {
                                           return callBackChannel == channelName;
                                       });
 
-        if (channelIt == monitoringChannels.end())
+        if (channelIt == monitoringChannels.cend())
             throw std::runtime_error("В данный момент в списке мониторинга нет выбранного вами канала.");
 
-        monitoringService->changeMonitoingChannelNotify(std::distance(monitoringChannels.begin(), channelIt),
+        monitoringService->changeMonitoingChannelNotify(std::distance(monitoringChannels.cbegin(), channelIt),
                                                         bEnableAllertion);
 
-        messageText.Format(L"Оповещения для канала %s %s", callBackChannel, bEnableAllertion ? L"включены" : L"выключены");
+        messageText.Format(L"Оповещения для канала %s %s", callBackChannel.GetString(), bEnableAllertion ? L"включены" : L"выключены");
     }
 
     assert(!messageText.IsEmpty() && "Сообщение пользователю пустое.");

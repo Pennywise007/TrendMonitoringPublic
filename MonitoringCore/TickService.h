@@ -94,7 +94,7 @@ private:
         // время последнего тика
         tick_clock::time_point lastTickTime = tick_clock::now();
         // интервал тиков
-        tick_clock::duration tickInterval;
+        tick_clock::duration tickInterval = CTickService::kDefTickInterval;
     };
 
     // Список с обработчиками тиков

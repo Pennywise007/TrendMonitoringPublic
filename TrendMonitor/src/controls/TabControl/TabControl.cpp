@@ -11,8 +11,8 @@ BEGIN_MESSAGE_MAP(CTabControl, CTabCtrl)
 END_MESSAGE_MAP()
 
 //----------------------------------------------------------------------------//
-LONG CTabControl::InsertTab(int nItem, LPCTSTR lpszItem,
-                            std::shared_ptr<CWnd> tabWindow)
+LONG CTabControl::InsertTab(_In_ int nItem, _In_z_ LPCTSTR lpszItem,
+                            _In_ std::shared_ptr<CWnd> tabWindow)
 {
     // вставляем элемент
     LONG insertedIndex = CTabCtrl::InsertItem(nItem, lpszItem);
@@ -35,8 +35,8 @@ LONG CTabControl::InsertTab(int nItem, LPCTSTR lpszItem,
 }
 
 //----------------------------------------------------------------------------//
-LONG CTabControl::InsertTab(int nItem, LPCTSTR lpszItem,
-                            std::shared_ptr<CDialog> tabDialog, UINT nIDTemplate)
+LONG CTabControl::InsertTab(_In_ int nItem, _In_z_ LPCTSTR lpszItem,
+                            _In_ std::shared_ptr<CDialog> tabDialog, UINT nIDTemplate)
 {
     // вставляем элемент
     LONG insertedIndex = CTabCtrl::InsertItem(nItem, lpszItem);

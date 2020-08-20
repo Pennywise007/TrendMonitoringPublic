@@ -30,7 +30,7 @@ protected:
 
 protected:
     // идентификатор текущего задания
-    TaskId m_currentTask;
+    TaskId m_currentTask = {};
     // результат задания
     MonitoringResult::Ptr m_taskResult;
     // Вспомогательный объект для ожидания загрузки данных
@@ -46,6 +46,6 @@ protected:
         eTestAddTaskList,
         eTestAddTaskParams,
         eTestRemoveTask
-    } m_testType;
+    } m_testType = TestType::eTestAddTaskList;
 };
 
