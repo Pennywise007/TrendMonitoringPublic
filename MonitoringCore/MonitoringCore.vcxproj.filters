@@ -92,9 +92,6 @@
     <ClInclude Include="src\src\IMonitoringTasksService.h">
       <Filter>MonitoringTasksService</Filter>
     </ClInclude>
-    <ClInclude Include="src\src\ApplicationConfiguration.h">
-      <Filter>Configuration</Filter>
-    </ClInclude>
     <ClInclude Include="src\ITelegramUsersList.h">
       <Filter>TelegramBot</Filter>
     </ClInclude>
@@ -103,6 +100,9 @@
     </ClInclude>
     <ClInclude Include="src\PugiXML\pugixml.hpp">
       <Filter>PugiXML</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ApplicationConfiguration.h">
+      <Filter>Configuration</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

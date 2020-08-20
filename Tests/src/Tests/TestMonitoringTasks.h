@@ -27,6 +27,8 @@ public:
 protected:
     // задаем параметры всех тестовых каналов мониторинга в m_taskParams
     void fillTaskParams();
+    // ожидать выполнения теста, возвращает истину если результат получен, ложь если был таймаут
+    bool waitForTaskResult(std::unique_lock<std::mutex>& lock, bool bNoTimeOut);
 
 protected:
     // идентификатор текущего задания
@@ -48,4 +50,3 @@ protected:
         eTestRemoveTask
     } m_testType = TestType::eTestAddTaskList;
 };
-
