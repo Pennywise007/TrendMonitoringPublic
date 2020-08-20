@@ -72,3 +72,13 @@
 - прочее (atlCOM, afx, всевозможные контейнеры)
 - pugixml
 - библиотека для ботов телеграма https://github.com/Pennywise007/TelegramDLLPublic
+
+
+Для сборки необходимы 4 макроса
+- $(BoostIncludeDir) - Директория включаемых файлов буста (D:\UtilsDir\boost\include\)
+- $(BoostLibDir)     - Директория библиотек буста         (D:\UtilsDir\boost\lib\)
+- $(MyDLLDir)        - Путь к общей папке откуда будет копироваться TelegramDLLPublic.dll  (D:\Common\DLL\)
+- $(MyIncludeDir)    - Путь к общей папке откуда будет браться TelegramThread.h            (D:\Common\include\TelegramDLL\)
+
+Для запуска понадобятся:
+libeay32 и ssleay32
