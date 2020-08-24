@@ -68,8 +68,8 @@
 
 Приложение написанно на С++17, используемые технологии:
 - boost (asio/program_options/string/spirit/fusion)
-- std (regex/algorithm/filesystem/thread/future/mutext/chrono/functional/memory/optional и многое другео) - старался по максимому делать std нежели на boost, в планах расширить функционал в С++20
-- прочее (atlCOM, afx, всевозможные контейнеры)
+- std (regex/algorithm/filesystem/thread/future/mutext/chrono/functional/memory/optional и многое другое) - старался по максимому делать std нежели на boost, в планах расширить функционал в С++20
+- прочее (AtlCOM, afx, всевозможные контейнеры)
 - pugixml
 - библиотека для ботов телеграма https://github.com/Pennywise007/TelegramDLLPublic
 
